@@ -1,0 +1,27 @@
+{
+    "name": "sbit/web-installer",
+    "description": "Laravel Web Installer For All Project",
+    "require-dev": {
+        "php": "^7.0.0|^8.0.0"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Sbit\\WebInstaller\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "web Halder",
+            "email": "southbengalitbd@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Sbit\\WebInstaller\\Providers\\WebInstallerServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "stable"
+}

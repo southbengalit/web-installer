@@ -198,6 +198,14 @@ class InstallController extends Controller
 
         $this->setEnvValue($env_val);
 
+        // Remove existing probably not matching symlinks
+        collect(config('filesystems.links'))->keys()->each(function ($link) {
+            if (file_exists($link)) {
+                unlink($link);
+            }
+        });
+        // Create new symlinks
+        Artisan::call('storage:link');
     }
 
     public function setEnvValue($values) 

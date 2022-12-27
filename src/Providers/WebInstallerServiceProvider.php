@@ -30,7 +30,11 @@ class WebInstallerServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        
+        $installedLogFile = storage_path('installed');
+
+        if (!file_exists($installedLogFile)) {
+            return redirect('/install');
+        }
     }
 
     /**

@@ -4,6 +4,7 @@ namespace Sbit\WebInstaller\Http\Controllers;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
@@ -198,6 +199,14 @@ class InstallController extends Controller
 
         $this->setEnvValue($env_val);
 
+        // Remove existing probably not matching symlinks
+        collect(config('filesystems.links'))->keys()->each(function ($link) {
+            if (file_exists($link)) {
+                unlink($link);
+            }
+        });
+        // Create new symlinks
+        Artisan::call('storage:link');
     }
 
     public function setEnvValue($values) 

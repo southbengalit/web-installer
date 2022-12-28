@@ -3,6 +3,8 @@
 namespace Sbit\WebInstaller\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Sbit\WebInstaller\Middleware\VerifyInstallMiddleware;
+use Illuminate\Contracts\Http\Kernel;
 
 class WebInstallerServiceProvider extends ServiceProvider
 {
@@ -28,9 +30,9 @@ class WebInstallerServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(Kernel $kernel)
     {
-        
+        $kernel->pushMiddleware(VerifyInstallMiddleware::class);
     }
 
     /**
